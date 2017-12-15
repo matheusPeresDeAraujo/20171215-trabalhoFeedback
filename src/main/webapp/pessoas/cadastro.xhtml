@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+   <body>
+
+      <ui:composition template="./../WEB-INF/template.xhtml">
+
+         <ui:define name="title">
+            Cadastro de pessoas | Feedback
+         </ui:define>
+
+         <ui:define name="content">
+            <f:metadata>
+               <f:viewParam name="id" value="#{pessoaCadastroBean.selectedId}"/>
+            </f:metadata>
+            <h:form>
+               <p:messages></p:messages>
+               <p:panelGrid columns="2" style="width: 100%">
+                  <p:outputLabel value="Nome:" for="nome" />
+                  <p:inputText id="nome" value="#{pessoaCadastroBean.pessoa.nome}"/>
+                 
+                  <p:outputLabel value="Sobrenome:" for="sobrenome" />
+                  <p:inputText id="sobrenome" value="#{pessoaCadastroBean.pessoa.sobrenome}" />
+                  
+                  <p:outputLabel value="Data de Nascimento:" for="datanasc" />
+                  <p:calendar id="datanasc" pattern="dd/MM/yyyy" value="#{pessoaCadastroBean.pessoa.nascimento}"/>
+                  
+                  <p:outputLabel value="Foto:" for="foto" /> 
+                  <p:outputPanel id="foto" style="margin-bottom:10px">
+                        <p:selectOneRadio id="customRadio" value="#{pessoaCadastroBean.pessoa.fotoUrl}" layout="custom">
+                            <f:selectItem itemLabel="" itemValue="op1" />
+                            <f:selectItem itemLabel="" itemValue="op2" />
+                            <f:selectItem itemLabel="" itemValue="op3" />
+                        </p:selectOneRadio>
+
+                        <h:panelGrid columns="3" cellpadding="5">
+                            <p:radioButton id="opt1" for="customRadio" itemIndex="0" />
+                            <h:outputLabel for="opt1" value="" />
+                            <p:graphicImage width="100px" height="100px" value="../resources/img/persona_op1.jpeg" />
+
+                            <p:radioButton id="opt2" for="customRadio" itemIndex="1" />
+                            <h:outputLabel for="opt2" value="" />
+                            <p:graphicImage width="100px" height="100px" value="../resources/img/persona_op2.jpeg" />
+
+                            <p:radioButton id="opt3" for="customRadio" itemIndex="2" />
+                            <h:outputLabel for="opt3" value="" />
+                            <p:graphicImage width="100px" height="100px" value="../resources/img/persona_op3.jpeg" />
+                        </h:panelGrid>
+                  </p:outputPanel>
+                  <p:outputLabel value="E-Mail:" for="email" />
+                  <p:inputText id="email" value="#{pessoaCadastroBean.pessoa.email}"/>
+                  
+                  <p:outputLabel value="Outras informações" for="bio" />
+                  <p:editor id="bio" value="#{pessoaCadastroBean.pessoa.bio}" />
+               </p:panelGrid>
+               <div style="clear: both; padding-top: 10px" />
+               
+               <p:commandButton ajax="false" value="Salvar" style="float: right" icon="ui-icon-save"
+                                action="#{pessoaCadastroBean.salvar()}"/>
+               <div style="clear: both"/>
+
+            </h:form>
+         </ui:define>
+
+      </ui:composition>
+
+   </body>
+</html>

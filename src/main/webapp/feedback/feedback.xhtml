@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <body>
+
+        <ui:composition template="./../WEB-INF/template.xhtml">
+
+            <ui:define name="title">
+                Feedback | Novo Feedback
+            </ui:define>
+
+            <ui:define name="content">
+                <f:metadata>
+                    <f:viewParam name="id" value="#{feedbackBean.selectedId}" />
+                </f:metadata>
+
+                <h1>Feedback | <small>Enviar Feedback</small></h1>
+
+                <h:form>
+                    <p:messages></p:messages>
+
+                    <p:panelGrid columns="2" style="width: 100%">
+
+                        <p:outputLabel value="Avaliação:" for="avaliacao" />
+                        <p:textEditor id="avaliacao" value="#{feedbackBean.feedback.texto}"/>
+                        <p:outputLabel for="nota" value="Nota:" />
+                        <p:selectOneRadio id="nota" value="#{feedbackBean.feedback.nota}">
+                            <f:selectItem itemLabel="1" itemValue="#{1.00}" />
+                            <f:selectItem itemLabel="2" itemValue="#{2.00}" />
+                            <f:selectItem itemLabel="3" itemValue="#{3.00}" />
+                            <f:selectItem itemLabel="4" itemValue="#{4.00}" />
+                            <f:selectItem itemLabel="5" itemValue="#{5.00}" />
+                        </p:selectOneRadio>
+                    </p:panelGrid>
+                    
+                       <p:commandButton ajax="false" value="Salvar" style="float: right" icon="ui-icon-save"
+                                        action="#{feedbackBean.salvar()}"/>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

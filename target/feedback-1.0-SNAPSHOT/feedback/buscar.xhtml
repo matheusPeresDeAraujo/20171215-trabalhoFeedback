@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+   <body>
+
+      <ui:composition template="./../WEB-INF/template.xhtml">
+
+         <ui:define name="title">
+            Feedback | Avaliacao de Pessoas
+         </ui:define>
+
+         <ui:define name="content">
+
+            <p:panelGrid columns="1">
+               <f:facet name="header">
+                  Avaliacao de Pessoas
+               </f:facet>
+
+               <!--Pesquisa-->
+               <h:form>
+                  <p:growl showDetail="true" />
+
+                  <p:outputLabel value="Nome/Sobrenome: " for="nome" />
+                  <p:inputText id="nome" value="#{pessoaListaBean.nome}"
+                               placeholder="Ex.: Euclides" size="25" />
+                  &nbsp;
+                  <p:commandButton ajax="false" value="Pesquisar" icon="ui-icon-search"
+                                   action="#{pessoaListaBean.pesquisa()}">
+                  </p:commandButton>
+               </h:form>
+
+               <!--Pesquisa-->
+               <p:dataTable var="pessoa" value="#{pessoaListaBean.pessoas}">
+
+                  <p:column headerText="Foto">
+                     <p:graphicImage width="100px" height="100px" value="../resources/img/persona_#{pessoa.fotoUrl}.jpeg" />
+                  </p:column>
+
+                  <p:column headerText="Nome">
+                     <h:outputText value="#{pessoa.nome}" />
+                  </p:column>
+
+                  <p:column headerText="Sobrenome">
+                     <h:outputText value="#{pessoa.sobrenome}" />
+                  </p:column>
+
+                    <p:column headerText="Nota" colspan="2">
+                        <h:panelGrid columns="2" style="border-style: hidden">
+                            
+                            <h:outputText value="#{feedbackBean.mostraNota(pessoa.id)}">
+                                <f:convertNumber type="number" minFractionDigits="2" maxFractionDigits="2" />
+                            </h:outputText>    
+                            <p:graphicImage width="50px" height="50px" value="#{feedbackBean.mostraNota(pessoa.id) > 2.5 ? 'https://www.shareicon.net/data/2015/08/29/92758_like_606x606.png' : 'https://cdn3.iconfinder.com/data/icons/social-icons-5/607/Dislike.png'}" />
+
+                        </h:panelGrid>
+                    </p:column>
+                   
+                  <p:column headerText="Ações">
+                     <h:form>
+                        <p:button value="Feedback" outcome="/feedback/feedback">
+                           <f:param name="id" value="#{pessoa.id}" />
+                        </p:button>
+                     </h:form>
+                  </p:column>
+               </p:dataTable>
+            </p:panelGrid>
+         </ui:define>
+      </ui:composition>
+
+   </body>
+</html>

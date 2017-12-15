@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>
+            <ui:insert name="title">
+                Feedback | Avaliação de Desempenho
+            </ui:insert>
+        </title>
+    </h:head>
+
+    <h:body>
+        <p:layout style="width: 90%; margin: 0 auto;">
+            <p:layoutUnit position="west" size="260">
+                <div style="width: fit-content; 
+                     text-align: center;
+                     margin: 0 auto;">
+                    <p:graphicImage value="/resources/img/logoAlternativaSmall.jpg" />
+                    <h:form>
+                        <p:menu>
+                            <p:submenu label="Cadastros">
+                                <p:menuitem value="Pessoas"
+                                            outcome="/pessoas/listar"
+                                            icon="ui-icon-person" />
+                            </p:submenu>
+                            <p:submenu label="Avaliação">
+                                <p:menuitem value="Feedback" 
+                                            outcome="/feedback/buscar"
+                                            icon="ui-icon-document" />
+                            </p:submenu>
+                        </p:menu>
+                    </h:form>
+                </div>
+            </p:layoutUnit>
+            <p:layoutUnit position="center">
+                <ui:insert name="content"></ui:insert>
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
+
+</html>
